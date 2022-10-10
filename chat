@@ -36,14 +36,14 @@ function stages(client, message) {
     stage = userStages[message.from];
     switch (stage) {
         case 'ABCD':
-                {       
-                    sendWppMessage(client, message.from, 'Certo! Você foi citado em alguma *execução fiscal*? \n \n 1️⃣ - Sim \n 2️⃣ - Não');
-                    if (message.body === '2') ; {
-                    userStages[message.from] = 'nao';
-                    } if (message.body === '1') ; {
-                    userStages[message.from] = 'sim';
+            {
+                    sendWppMessage(client, message.from, 'Certo! Você foi citado em alguma *execução fiscal*? \n \n 1️⃣ - Sim \n 2️⃣ - Não')
+                    if (message.body == '1') {
+                        userStages[message.from] = 'sim';
+                    } else if (message.body == '2') {
+                        userStages[message.from] = 'nao';
                     }
-                    }
+            }
         break;       
         case 'OBG1':
             sendWppMessage(client, message.from, 'Obrigada pelas informações. Em instantes, iremos atender a sua solicitação.');
@@ -200,30 +200,24 @@ function stages(client, message) {
         case 'nao':
                 {
                 sendWppMessage(client, message.from, 'O que você deseja, então? \n \n 1️⃣ - Emissão de CND \n 2️⃣ - Simular parcelamento de débito inscrito em dívida ativa \n 3️⃣ - Agendar reunião com o Procurador(a) \n 4️⃣ - Telefones para contato / e-mail \n 5️⃣ - Falar com um servidor \n6️⃣ - Críticas ou elogios. ');
-                {
-                userStages[message.from] = 'OD32';
-                }if (message.body === '1') {
-                userStages[message.from] = 'BD03';
-                }if (message.body === '2') {
-                userStages[message.from] = 'OD35';
-                }if (message.body === '3') {
-                userStages[message.from] = 'OBG1';
-                }if (message.body === '4') {
-                userStages[message.from] = 'OD36';
-                }if (message.body === '5') {
-                userStages[message.from] = 'OD37';
-                }if (message.body === '6') {
-                break;
+                const userStages = { 
+                    '1': 'OD32',
+                    '2': 'BD03',
+                    '3': 'OBG1',
+                    '4': 'OD36',
+                    '5': 'OD37',
+                    '6': 'OD36',
                 }
+                console.log(userStages[message.from]);
             }
 
             case 'sim':
                 {
                 sendWppMessage(client, message.from, 'A execução fiscal doi ajuizada em face de: \n \n 1️⃣ - Pessoa Física \n 2️⃣ - Pessoa Jurídica');
                 {
-                } if (message.body === '1') ; {    
+                } if (message.body === '1') {    
                 userStages[message.from] = 'S011';
-                } if (message.body === '2') ; {
+                } else if (message.body === '2') {
                 userStages[message.from] = 'S012';
                 }
                 }
